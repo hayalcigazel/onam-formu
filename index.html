@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aydınlatılmış Onam Formu | TÜBİTAK 1001</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .header img {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .header .project-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        .content {
+            padding: 25px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .icon {
+            font-size: 20px;
+        }
+        .info-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+            text-align: justify;
+        }
+        .info-text p {
+            margin-bottom: 12px;
+        }
+        .highlight-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box.warning {
+            background: #fef9e7;
+            border-left-color: #f39c12;
+        }
+        .highlight-box.success {
+            background: #e8f8f0;
+            border-left-color: #27ae60;
+        }
+        .rights-list {
+            list-style: none;
+            padding: 0;
+        }
+        .rights-list li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .rights-list li .check {
+            color: #27ae60;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Form Alanları */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Onay Kutuları */
+        .consent-items {
+            margin: 20px 0;
+        }
+        .consent-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .consent-item:hover {
+            background: #e8f4f8;
+        }
+        .consent-item.checked {
+            background: #e8f8f0;
+            border-color: #27ae60;
+        }
+        .consent-item input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #27ae60;
+        }
+        .consent-item .text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+        .consent-item .required {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Onay Butonu Alanı */
+        .submit-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .submit-section p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .btn-clear {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-clear:hover {
+            background: #c0392b;
+        }
+        .btn-confirm {
+            background: #27ae60;
+            color: white;
+            flex: 1;
+            justify-content: center;
+        }
+        .btn-confirm:hover {
+            background: #1e8449;
+        }
+        .btn-confirm:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Onay Sonrası */
+        .confirmation-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .confirmation-overlay.show {
+            display: flex;
+        }
+        .confirmation-box {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: popIn 0.3s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .confirmation-box .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        .confirmation-box h2 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        .confirmation-box p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .confirmation-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .confirmation-details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .confirmation-details .row:last-child {
+            border-bottom: none;
+        }
+        .confirmation-details .label {
+            color: #888;
+        }
+        .confirmation-details .value {
+            font-weight: 600;
+            color: #333;
+        }
+        .btn-download {
+            background: #3498db;
+            color: white;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .btn-close {
+            background: #95a5a6;
+            color: white;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Yazdırma */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .btn, .signature-actions {
+                display: none !important;
+            }
+            .signature-canvas-container {
+                border: 1px solid #000;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .content {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AYDINLATILMIŞ ONAM FORMU</h1>
+            <div class="subtitle">Odak Grup Görüşmesi Katılımcı Bilgilendirme ve Onay Belgesi</div>
+            <div class="project-info">
+                TÜBİTAK 1001 Araştırma Projesi | Proje No: 123B456<br>
+                "Cumhuriyetin 100. Yılında Sinema Seyircisi"<br>
+                Mersin Üniversitesi | 2024-2026
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Proje Hakkında -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📋</span>
+                    Araştırma Hakkında Bilgilendirme
+                </div>
+                <div class="info-text">
+                    <p>Bu araştırma, TÜBİTAK tarafından desteklenen ve Mersin Üniversitesi bünyesinde yürütülen "Cumhuriyetin 100. Yılında Sinema Seyircisi" projesi kapsamında gerçekleştirilmektedir.</p>
+                    <p><strong>Araştırmanın Amacı:</strong> Türkiye'deki sinema seyircilerinin film izleme alışkanlıkları, tercihleri ve sinema deneyimlerini derinlemesine anlamak.</p>
+                    <p><strong>Proje Yürütücüsü:</strong> Doç. Dr. Hakan Erkılıç</p>
+                </div>
+            </div>
+
+            <!-- Görüşme Bilgileri -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">🎤</span>
+                    Görüşme Hakkında
+                </div>
+                <div class="info-text">
+                    <div class="highlight-box">
+                        <strong>Görüşme Süresi:</strong> Yaklaşık 35-45 dakika<br>
+                        <strong>Görüşme Şekli:</strong> Online (Zoom/Google Meet) veya Yüz yüze<br>
+                        <strong>Katılımcı Sayısı:</strong> Odak grup görüşmesi (6-12 kişi)
+                    </div>
+                    <p>Görüşme sırasında size sinema alışkanlıklarınız, film tercihleriniz ve sinema deneyimleriniz hakkında sorular yöneltilecektir. Cevaplamak istemediğiniz soruları geçebilirsiniz.</p>
+                </div>
+            </div>
+
+            <!-- Kayıt ve Gizlilik -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">🔒</span>
+                    Kayıt ve Gizlilik
+                </div>
+                <div class="info-text">
+                    <div class="highlight-box warning">
+                        <strong>⚠️ Önemli:</strong> Bu görüşme, analiz amacıyla <strong>ses ve video kaydına</strong> alınacaktır.
+                    </div>
+                    <ul class="rights-list">
+                        <li><span class="check">✓</span> Kimlik bilgileriniz (ad, soyad, telefon) gizli tutulacak ve yayınlanmayacaktır.</li>
+                        <li><span class="check">✓</span> Ses ve video kayıtları yalnızca araştırma ekibi tarafından izlenecektir.</li>
+                        <li><span class="check">✓</span> Veriler anonim hale getirilerek analiz edilecektir.</li>
+                        <li><span class="check">✓</span> Tüm kayıtlar proje bitiminde (2026) imha edilecektir.</li>
+                        <li><span class="check">✓</span> Verileriniz üçüncü şahıslarla paylaşılmayacaktır.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Haklarınız -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">⚖️</span>
+                    Katılımcı Hakları
+                </div>
+                <div class="info-text">
+                    <div class="highlight-box success">
+                        Katılımınız tamamen <strong>gönüllülük</strong> esasına dayanmaktadır.
+                    </div>
+                    <ul class="rights-list">
+                        <li><span class="check">✓</span> Görüşmeden istediğiniz zaman, sebep göstermeksizin çekilebilirsiniz.</li>
+                        <li><span class="check">✓</span> Cevaplamak istemediğiniz soruları geçebilirsiniz.</li>
+                        <li><span class="check">✓</span> Verilerinizin silinmesini talep edebilirsiniz.</li>
+                        <li><span class="check">✓</span> Araştırma sonuçları hakkında bilgi alabilirsiniz.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- İletişim -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📞</span>
+                    İletişim
+                </div>
+                <div class="info-text">
+                    <p>Araştırma hakkında sorularınız için:</p>
+                    <div class="highlight-box">
+                        <strong>Proje Yürütücüsü:</strong> Doç. Dr. Hakan Erkılıç<br>
+                        <strong>E-posta:</strong> herkilic@mersin.edu.tr<br>
+                        <strong>Kurum:</strong> Mersin Üniversitesi, İletişim Fakültesi
+                    </div>
+                </div>
+            </div>
+
+            <!-- Katılımcı Bilgileri Formu -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">👤</span>
+                    Katılımcı Bilgileri
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ad Soyad *</label>
+                        <input type="text" id="participantName" placeholder="Adınız Soyadınız" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tarih</label>
+                        <input type="date" id="consentDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefon (Opsiyonel)</label>
+                        <input type="tel" id="participantPhone" placeholder="05XX XXX XX XX">
+                    </div>
+                    <div class="form-group">
+                        <label>E-posta (Opsiyonel)</label>
+                        <input type="email" id="participantEmail" placeholder="ornek@mail.com">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onay Kutuları -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">✅</span>
+                    Onay Maddeleri
+                </div>
+                <div class="consent-items">
+                    <div class="consent-item" onclick="toggleConsent(this, event)">
+                        <input type="checkbox" id="consent1" required>
+                        <div class="text">
+                            <span class="required">*</span> Yukarıdaki bilgileri okudum ve anladım. Araştırmanın amacı, yöntemi ve katılımcı haklarım konusunda bilgilendirildim.
+                        </div>
+                    </div>
+                    <div class="consent-item" onclick="toggleConsent(this, event)">
+                        <input type="checkbox" id="consent2" required>
+                        <div class="text">
+                            <span class="required">*</span> Görüşmenin <strong>ses ve video kaydına</strong> alınmasını kabul ediyorum.
+                        </div>
+                    </div>
+                    <div class="consent-item" onclick="toggleConsent(this, event)">
+                        <input type="checkbox" id="consent3" required>
+                        <div class="text">
+                            <span class="required">*</span> Kişisel verilerimin araştırma kapsamında, gizlilik ilkelerine uygun şekilde işlenmesini kabul ediyorum.
+                        </div>
+                    </div>
+                    <div class="consent-item" onclick="toggleConsent(this, event)">
+                        <input type="checkbox" id="consent4" required>
+                        <div class="text">
+                            <span class="required">*</span> Bu araştırmaya <strong>tamamen gönüllü</strong> olarak katılıyorum ve istediğim zaman çekilebileceğimi biliyorum.
+                        </div>
+                    </div>
+                    <div class="consent-item" onclick="toggleConsent(this, event)">
+                        <input type="checkbox" id="consent5">
+                        <div class="text">
+                            (Opsiyonel) Araştırma sonuçları hakkında bilgilendirilmek istiyorum.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onay Butonu -->
+            <div class="submit-section">
+                <p>Yukarıdaki tüm maddeleri işaretleyerek formu onaylayabilirsiniz.<br>
+                <strong>PDF'i indirip WhatsApp veya e-posta ile gönderebilirsiniz.</strong></p>
+                <button class="btn btn-confirm" id="confirmBtn" onclick="submitConsent()" disabled style="width: 100%; justify-content: center; padding: 15px 30px; font-size: 16px;">
+                    ✅ Onaylıyorum ve PDF İndir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onay Sonrası Popup -->
+    <div class="confirmation-overlay" id="confirmationOverlay">
+        <div class="confirmation-box">
+            <div class="icon">✅</div>
+            <h2>Onay Alındı!</h2>
+            <p>Aydınlatılmış onam formunu başarıyla onayladınız. Katılımınız için teşekkür ederiz.</p>
+            <div class="confirmation-details">
+                <div class="row">
+                    <span class="label">Katılımcı:</span>
+                    <span class="value" id="confirmName">-</span>
+                </div>
+                <div class="row">
+                    <span class="label">Tarih:</span>
+                    <span class="value" id="confirmDate">-</span>
+                </div>
+                <div class="row">
+                    <span class="label">Saat:</span>
+                    <span class="value" id="confirmTime">-</span>
+                </div>
+                <div class="row">
+                    <span class="label">Onay Kodu:</span>
+                    <span class="value" id="confirmCode">-</span>
+                </div>
+            </div>
+            <button class="btn btn-download" onclick="downloadConsent()">
+                📥 PDF Olarak İndir
+            </button>
+            <button class="btn btn-close" onclick="closeConfirmation()">
+                Kapat
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Tarih otomatik ayarla
+        document.getElementById('consentDate').value = new Date().toISOString().split('T')[0];
+
+        // Onay kutuları - event kontrolü ile çift toggle engelleniyor
+        function toggleConsent(item, event) {
+            // Eğer tıklama doğrudan checkbox'tan geldiyse, tarayıcı zaten toggle etti
+            // Manuel toggle yapmıyoruz, sadece stil güncelliyoruz
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            if (event && (event.target === checkbox || event.target.tagName === 'INPUT')) {
+                // Checkbox zaten kendi kendine toggle oldu
+                item.classList.toggle('checked', checkbox.checked);
+                validateForm();
+                return;
+            }
+            // Div'e veya text'e tıklandıysa manuel toggle yap
+            checkbox.checked = !checkbox.checked;
+            item.classList.toggle('checked', checkbox.checked);
+            validateForm();
+        }
+
+        // Form doğrulama
+        function validateForm() {
+            const name = document.getElementById('participantName').value.trim();
+            const consent1 = document.getElementById('consent1').checked;
+            const consent2 = document.getElementById('consent2').checked;
+            const consent3 = document.getElementById('consent3').checked;
+            const consent4 = document.getElementById('consent4').checked;
+
+            const isValid = name && consent1 && consent2 && consent3 && consent4;
+            document.getElementById('confirmBtn').disabled = !isValid;
+        }
+
+        // Input değişikliklerini dinle
+        document.getElementById('participantName').addEventListener('input', validateForm);
+        document.querySelectorAll('.consent-item input').forEach(cb => {
+            cb.addEventListener('change', function() {
+                this.closest('.consent-item').classList.toggle('checked', this.checked);
+                validateForm();
+            });
+        });
+
+        // Onay gönder
+        function submitConsent() {
+            const name = document.getElementById('participantName').value.trim();
+            const date = document.getElementById('consentDate').value;
+            const now = new Date();
+            const time = now.toLocaleTimeString('tr-TR');
+            const code = 'ONY-' + Date.now().toString(36).toUpperCase();
+
+            // Bilgileri göster
+            document.getElementById('confirmName').textContent = name;
+            document.getElementById('confirmDate').textContent = new Date(date).toLocaleDateString('tr-TR');
+            document.getElementById('confirmTime').textContent = time;
+            document.getElementById('confirmCode').textContent = code;
+
+            // Verileri kaydet
+            const consentData = {
+                name: name,
+                phone: document.getElementById('participantPhone').value,
+                email: document.getElementById('participantEmail').value,
+                date: date,
+                time: time,
+                code: code,
+                consents: {
+                    bilgilendirme: document.getElementById('consent1').checked,
+                    sesVideoKaydi: document.getElementById('consent2').checked,
+                    veriIsleme: document.getElementById('consent3').checked,
+                    gonulluKatilim: document.getElementById('consent4').checked,
+                    sonucBilgilendirme: document.getElementById('consent5').checked
+                },
+                timestamp: now.toISOString()
+            };
+
+            // LocalStorage'a kaydet
+            const consents = JSON.parse(localStorage.getItem('onamFormlari') || '[]');
+            consents.push(consentData);
+            localStorage.setItem('onamFormlari', JSON.stringify(consents));
+
+            // Popup göster
+            document.getElementById('confirmationOverlay').classList.add('show');
+        }
+
+        function closeConfirmation() {
+            document.getElementById('confirmationOverlay').classList.remove('show');
+        }
+
+        // PDF olarak indir - Mobilde de çalışan yöntem
+        function downloadConsent() {
+            const btn = document.querySelector('.btn-download');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ PDF Oluşturuluyor...';
+            btn.disabled = true;
+
+            // Overlay'i geçici olarak gizle
+            const overlay = document.getElementById('confirmationOverlay');
+            overlay.style.display = 'none';
+
+            const container = document.querySelector('.container');
+
+            html2canvas(container, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                logging: false,
+                windowWidth: 700
+            }).then(function(canvas) {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const margin = 10;
+                const usableWidth = pageWidth - (margin * 2);
+
+                const imgWidth = usableWidth;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+                // Eğer içerik tek sayfaya sığmazsa sayfalara böl
+                if (imgHeight <= pageHeight - (margin * 2)) {
+                    pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
+                } else {
+                    let remainingHeight = imgHeight;
+                    let position = 0;
+                    let page = 0;
+
+                    while (remainingHeight > 0) {
+                        if (page > 0) pdf.addPage();
+
+                        const usablePageHeight = pageHeight - (margin * 2);
+                        const sourceY = (position / imgHeight) * canvas.height;
+                        const sourceH = (usablePageHeight / imgHeight) * canvas.height;
+
+                        const pageCanvas = document.createElement('canvas');
+                        pageCanvas.width = canvas.width;
+                        pageCanvas.height = Math.min(sourceH, canvas.height - sourceY);
+                        const ctx = pageCanvas.getContext('2d');
+                        ctx.drawImage(canvas, 0, sourceY, canvas.width, pageCanvas.height, 0, 0, canvas.width, pageCanvas.height);
+
+                        const pageImgData = pageCanvas.toDataURL('image/jpeg', 0.95);
+                        const drawHeight = (pageCanvas.height * imgWidth) / canvas.width;
+                        pdf.addImage(pageImgData, 'JPEG', margin, margin, imgWidth, drawHeight);
+
+                        position += usablePageHeight;
+                        remainingHeight -= usablePageHeight;
+                        page++;
+                    }
+                }
+
+                const name = document.getElementById('participantName').value.trim().replace(/\s+/g, '_') || 'katilimci';
+                const dateStr = new Date().toISOString().split('T')[0];
+                pdf.save('Onam_Formu_' + name + '_' + dateStr + '.pdf');
+
+                // Overlay'i tekrar göster
+                overlay.style.display = '';
+                overlay.classList.add('show');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }).catch(function(error) {
+                console.error('PDF oluşturma hatası:', error);
+                alert('PDF oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.');
+                overlay.style.display = '';
+                overlay.classList.add('show');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
